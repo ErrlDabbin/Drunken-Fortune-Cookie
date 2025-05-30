@@ -31,6 +31,16 @@ function getFortuneImage(req) {
 
 // API Routes
 
+const express = require('express');
+const app = express();
+const { generateFrameHtml } = require('./farcaster-integration');
+
+app.use(express.json()); // Parse JSON requests
+
+app.get('/', (req, res) => {
+  res.send(generateFrameHtml(req));
+});
+
 // Get fortune status
 app.get('/api/fortune/status', (req, res) => {
   const userId = req.query.userId;
